@@ -1,0 +1,30 @@
+- Với hình tam giác : 
+
+void draw(int height) {
+    if (height <= 0) {
+        return;
+    }
+
+    // In dấu '*' cho mỗi hàng
+    for (int i = 0; i < height; ++i) {
+        cout << "* ";
+    }
+    cout <<endl;
+
+    
+    draw(height - 1);
+}
+
+- Đầu tiên truyền vào chiều cao là 3  
+
+
+||
+||
+|draw(0)| --> return pop ra khỏi stack 
+|draw(1)| --> chạy for (0,1) in ra * --> Cút ra stack 
+|draw(2)| --> Chạy for (0,2) in ra ** --> Cút ra  stack 
+|draw(3)| --> Chạy for (0,3) in ra *** --> Cút ra khỏi stack hết rỗng 
+++++++++
+
+
+

@@ -1,0 +1,221 @@
+- Bản chất của đệ quy là hàm gọi lại chính nó để giải quyết các vấn đề 
+lớn hơn thành nhiều vấn đề con nhở hơn . 
+  + Chúng ta phải đi từ một bài toán phức tạp phải tìm ra được bài toán 
+con của cái thằng đó. 
+
+- Cơ chế hoạt động của đệ quy 
+ + mỗi lần gọi hàm thì chương trình sẽ gọi ra một phiên bản nhỏ hơn của 
+chính nó và như vậy cho đến khi nó đạt điều kiện dừng. 
+ + Điều quan trọng của mỗi cuộc đệ quy là mỗi cuộc gọi đệ quy là phải có 
+điều kiện dừng để tránh lặp vô hạn.
+ + Nó sẽ gọi từ những hàm lớn 
+
+- Một ví dụ đơn giản về đệ quy : Tính tổng giai thừa  
+      if( n == 0 hoặc n == 1){
+        return 1;
+      }
+      else{
+        return n * ĐêQuy(n-1);
+      }
+
++ Ở đây thì hàm đệ quy sẽ gọi lại chính nó với đối số nhỏ hơn khi nó đạt đến
+điều kiện dừng (Nếu n = 0 hoặc n = 1 ). Quá trình này sẽ tích hợp kết quả 
+cho đến khi đạt được kết quả cuối cùng.
+
+- Tư duy đệ quy : 
+1. Xác định điều kiện dừng : Xác định điều kiện dừng để hàm không gọi chính nó 
+nữa --> Điều này giúp ngăn chặn quá trình đệ quy
+
+2. Chia vấn đề thành nhiều vấn đề nhỏ hơn và giải quyết chúng từ những cái 
+hàm nhỏ hơn đó xây dựng nên vấn đề lớn hơn. 
+
+
+- void draw(int h){
+    if(h ==0 ){
+        return;
+    }
+    draw(h-1);
+    for (int i=0;i<h;i++){
+        printf("#");
+    }
+    printf("\n");
+}
+
+ví dụ với draw (int h =3) h!= 0 
+      draw (2) h!=0 
+      draw(1)  h!=0
+
+      draw(0)  h ==0 --> KẾt thúc 
+
+
+
+
+
+|draw(0)       | -> Kết thúc chương trình 
+|draw(1)       | -> Chạy vòng for ("#")
+|draw(2)       | -> Chạy vòng for ("##")
+|draw(3)       | -> Chạy vòng for ("###")
+++++++++
+
+==> Kết quả sẽ đi từ thằng con tới thằng cha tức là với chu trình như thế 
+thì nó sẽ in ra của thằng con sau đó sẽ in ra của thăng cha : 
+
+#
+##
+###
+
+
+void XinChao(){
+    cout<<"\nXin chao" ;
+    XinChao();
+}
+
+- Hầu như học đệ quy sẽ liên quan đến việc truyền một tham chiếu khác 
+thằng đệ quy này nó lại liên quan đến hàm lifo (Công thức truy hồi ) 
+
+int tong (int n){
+    if( n ==1){
+        return 1;
+    }
+    else {
+        return  n + tong (n-1);
+    }
+}
+ 
+- Mỗi khi bạn gọi một cái hàm tổng ví dụ như là ban đầu : tong(5)
+
+
+
+
+|Tong(1)| --> return 1
+|    1  |
+|Tong(2)|  2 + tong (1) = 3
+|Tong(3)|  3 + Tong 2
+|Tong(4)|--> Thằng 5 cứ đợi đã
+|Tong(5)|
+++++++++++
+
+==> Nhét thằng đại ca xuống đáy chai rồi cứ dần dần lên rồi sẽ được một kết 
+quả trả về ở nắp (đầu chai) tức là thằng tiểu đệ tính được sẽ ở đầu nắp rồi 
+cứ như thế sẽ được hàm đại ca
+
+- với phần đệ quy thì ta cứ phải tư duy ngược đời : 
++ Với phần tổng 5 ta sễ không đi tính thằng tổng 5 mà là cất mấy thằng to đi 
+và khi tính được tổng của thằng nhỏ sẽ đảo ngược lại. 
++ Với một hàm sau khi return hoặc là chạy hết sẽ được cất ra khỏi stack 
+và kết quả mà nó để lại một là đưa ra màn hình , một là sẽ được lưu trữ
+trong các hàm còn lại trong stack. 
+
++ Cái tư duy ở đây là gặp điều kiện dừng thì nó không phải dừng chương trình 
+mà là nó sẽ dừng đệ quy thôi và lúc này sẽ liên quan đến stack . Cái mà làm 
+chương trình (hàm ) dừng ở đây là cái stack sau khi nó rỗng. 
+
+
+
+
++ Có hai kiểu đệ quy mà chúng ta hay gặp : 
+    + Xử lí các câu lệnh trước sau đó là chúng ta sẽ đệ quy (1)
+     ===> NÓ SẼ CHẠY TỪ TO ĐẾN BÉ  ( CHẠY TRƯỚC KHI GỌI )
+
+
+    + Đệ quy xong và các câu lệnh sẽ được đặt hết dưới hàm đệ quy (2) 
+    ===> NÓ SẼ CHẠY TỪ BÉ ĐẾN TO  (GỌI TRƯỚC KHI CHẠY )
+
+void drawTriangle(int height) {  (1)
+    if (height <= 0) {
+        return;
+    }
+    for (int i = 0; i < height; ++i) {
+        cout << "* ";
+    }
+    cout << endl;
+    drawTriangle(height - 1);
+}
+
+==> Câu lệnh đặt trước hàm đệ quy ---> Nó sẽ chạy từ to đến bé  
+****
+***
+**
+*
+
+
+void drawTriangle(int height) {  (2)
+    if (height <= 0) {
+        return;
+    }
+   
+    drawTriangle(height - 1);
+    for (int i = 0; i < height; ++i) {
+        cout << "*";
+    }
+    cout << endl;
+}
+==> Câu lệnh đặt sau hàm đệ quy : Nó sẽ chạy từ bé đến to 
+*
+**
+***
+****
+
+- Biến check được gọi là tham số có giá trị mặc định (default parameter ). Một 
+khi tham số có giá trị mặc định là một tham số mà bạn có thể không cần 
+phải truyền giá trị khi gọi hàm, vì nếu không truyền , nó sẽ sử dụng giá 
+trị mặc định đã được xác định trong khai báo hàm. 
++ Đặc điểm của tham số hàm có giá trị mặc định bao gồm : Không bắt buộc truyền 
+giá trị mặc định , và khi gọi mình cũng chả cần truyền vào luôn 
+==> Coi như tham số truyền vào hàm này là một giá trị mặc định , chỉ tồn tại trong 
+hàm chứ không tồn tại trong tham số. 
+
+=========================================================================
+- Khi được  gọi thì hàm đệ quy thường được truyền cho một tham số , thường là 
+kích thước của bài toán lớn ban đầu . Sau mỗi lần gọi đệ quy , tham số đó 
+sẽ nhỏ dần , nhằm phản ánh bài toán nhỏ hơn và đơn giản hơn. 
+
+- Khi tham số đạt tới một giá trị giá trị cực tiểu (tại điểm neo) , hàm sẽ 
+chấm dứt. 
+
+void countDown(int count)
+{
+    if(count==0){
+        return ;
+    }
+    else{
+	   cout << "push " << count << '\n';
+	   countDown(count - 1); 
+}
+}
+
+
+- Ví dụ khi ta gọi hàm : countDown(3)
+
+- Terminal : 
+     in ra 3 --> Gọi đệ quy 2
+     in ra 2 --> Gọi đệ quy 1
+     in ra 1 --> Gọi đệ quy 0
+     
+  
+- Stack : 
+     count (2) - Kiểm tra if --> Không thỏa --> else 
+     count (1) - Kiểm tra if --< Khong thỏa --> else 
+     count (0) - if thỏa - Dừng chương trình 
+
+- Những bài đệ quy thì chúng ta phải có kiến thức về hệ thức truy hồi : 
++ Giai thừa : 
+    Theo giả thiết, ta có : n! = (n-1)! * n. Như vậy :
+    Để tính n! ta cần phải tính (n-1)!
+    Để tính (n-1)! ta phải tính (n-2)!
+
++ Dãy fibonaci : 
+   F(n) = 0, nếu n = 0
+   F(n) = 1, nếu n = 1
+   F(n) = F(n-1) + F(n-2), nếu n > 1
+
++ Cho một số nguyên dương N , viết function in  ra  màn hình từ một đến n :
+
+- Thuật toán sắp xếp trộn : 
++ T(n) là thời gian thực hiện chương trình sắp xếp trộn n p tử  
++ T(n/2) là thời gian thực hiện sắp xếp trộn n/2 phần tử 
+C1 là thời gian sắp xếp với danh sách độ dài là 1 
++ Với n > 1 , chia danh sách thành hai nửa và trộn nên ta có tổng thời gian 
+là C2n 
+
++  

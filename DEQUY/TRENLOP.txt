@@ -1,0 +1,18 @@
+- Viết các chương trình đệ quy luôn luôn gặp các  chương trình con 
+- Nghiệm của phương trình đệ quy chính là thời gian chạy của thuật toán đó 
+
+- Thành lập chương trình đệ quy
+
+- Giải chương trình đệ quy : Lời giải tổng quát cho một lớp phương trình dệ 
+quy, ta chia thành a bài toán con và mỗi bài toán con có kích thước n/b 
+
+- Giải các bài toán này thành các bài toán con kích thước n / b vầ tổng hợp kết quả  
+lại từ kết quả của bài  toán con .
+
++ T(n) là thời gian để giải bài toán kích thước n thì ta có phương trình đệ quy : 
+{
+   T(1) = 1
+   T(n) = a.T(n/b) + d(n) 
+
+}
+

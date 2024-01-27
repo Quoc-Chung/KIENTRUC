@@ -1,0 +1,13 @@
+                                    - Chia để trị - Tham lam - Quay lui - Quy hoạch động - 
+
+- Vận dụng  các phương pháp  xác định được  bài nào cần áp dụng thuật toán nào. 
+-  Suy xét lựa chọn cách giải các bài toán trong thực tế. 
+- Bài này áp dụng hai đề : 
+     + Cấu trúc dữ liệu và giải thuật 
+     + Toán rời rạc 
+- Các buổi thực hành giải quyết các bài toán bằng các thuật toán quay lui , tham lam, quy hoạch động 
+-  thực hành  (30%)  +  Chuyên cần (10%) + Báo cáo bài tập lớn ( 60% )
+- Thuạt toán là một dãy hữu hạn  các thao tác và trình tự thực  hiện  các thao tác đó sao cho sau khi thực hiện
+dãy thao tác này theo trình tự chỉ  ra sẽ thu được kết quả mong muốn. 
+
+- Phân tích các phương trình đệ quy : 

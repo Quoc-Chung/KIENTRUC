@@ -1,0 +1,79 @@
+- Ngăn xếp STACK hoạt động theo kiểu LIFO (Vào trước ra sau ).
+- Một phần tử khi cho vào ngăn xếp thì nó sẽ được đưa đến đỉnh của ngăn 
+xếp . Sau đó khi một phần tử khác mà thêm vào tiếp thì nó sẽ được thêm 
+vào tiếp đỉnh ngăn xếp . Sau đó nó sẽ đẩy cái thằng cho vào đầu tiên xuống 
+một nấc  
+- Tóm lại là cái stack này hoạt động không khác gì việc cho viên bi vào chai,
+khi ta cho bi vào chai thì ban đầu việc cho bi sẽ là cho vào đầu chai , những 
+viên bi tiếp theo khi cho vào đầu chai thì nó sẽ đẩy cái thằng vừa cho vào đầu 
+xuống đáy. Đổ ra thì cái thằng mới đc cho vào sẽ ra đầu tiên .
+- Đó được gọi là cấu trúc một đầu . 
+
+--------------------
+---->              |
+---->              |
+---->              |
+--------------------
+
+- Hàng đợi thì lại hoạt động theo kiểu FIFO ( Vào trước ra trước )
+- Một phần tử khi thêm vào danh sách sẽ được thêm vào ở một đầu và 
+tất cả việc xóa khỏi danh sách sẽ được thực hiện ở đầu kia  
+
+------------------------
+--->                 --->
+--->                 --->
+--->                 --->
+-----------------------
+
+- Tóm lại là cách hoạt động của queue chả khác gì việc xếp hàng thanh toán 
+trong BigC , thằng nào vào xếp hàng trước thì sẽ được ra trước thế cho nó 
+dễ 
+
+* CÁC PHƯƠNG THỨC CỦA STACK : 
+
++ push (VALUE) : Thêm một phần tử lên đỉnh ngăn xếp 
+
++ top (VALUE)  : Lấy ra cái phần tử vừa được thêm vào gần nhất (Thằng 
+đang ở đỉnh stack )
+
++ pop (VALUE)  : Lấy ra phần tử trên cùng của ngăn xếp .
+
++ size () : Trả về số lượng của ngăn xếp 
+
++ empty() : Kiểm tra xem ngăn xếp có trống hay không 
+
+        if (myStack.empty()) {
+            ---- Ngăn xếp rỗng ---
+        } else {
+            ---- Ngăn xếp không rỗng ----
+        }
+
+
+* CÁC PHƯƠNG THỨC CỦA QUEUE : 
+
++ push(VALUE) : Thêm một phần tử vào cuối hàng đợi 
+
++ front() : Lấy ra giá trị phần tử ở đầu hàng đợi (Phân tử thêm vào đầu tiên )
+--> Trả về cái phần tử đã được thêm vào trước cùng 
+
++ back () : Lấy ra giá trị phần tử ở cuối hàng đợi(Phần tử thêm vào cuối cùng )
+--> Trả về cái phần tử đã được thêm vào sau cùng 
+
++ pop() : Xóa phần tử ở đầu hàng đợi (Xóa phần tử thêm vào trước cùng )
+--> Xóa phần tuwe được thêm vào trước cùng. 
+
+
++ size() : Trả về số lượng phần tử trong hàng đợi 
+
++ empty() : Kiểm tra xem hàng đợi có trống hay không 
+     
+        if (myQueue.empty()) {
+          ---- Hàng đợi rỗng  ---- 
+        } else {
+          ---- Hàng đợi không rỗng ----
+        }
+
+-- Mấy bài giải quyết theo thứ tự ngược ngược thì dùng ngăn xếp : Kiểu push vào 
+rồi mới lấy ra kiểm tra ấy thì dùng ngăn xếp STACK 
+
+-- Mấy bài giải quyết theo thứ tự xuối thì dùng hàng đợi.

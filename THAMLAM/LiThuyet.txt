@@ -1,0 +1,17 @@
+- Tham lam là cách giải quyết một vấn đề mà trong đó ta tìm ra cách để
+tạo ra một kết quả tốt nhất.
+- Tuy nhiên đôi lúc kết quả này lại sai nếu không được cân nhắc cụ thể.
+- Tham lam là một nhánh nhỏ của quy hoạch động 
+
+- Cứ hiểu đơn giản thuật toán tham lam là phương pháp giải quyết vấn đề 
+trong lập trình bằng cách luôn chọn lựa lựa chọn tốt nhất ở mỗi bước để 
+hy vọng rằng sẽ dẫn đến kết quả tốt nhất toàn cục. 
+
+- Các quyết định tại mỗi bước của thuật toán được đưa ra dựa trên thông tin 
+có sẵn tại thời điểm mà không quan tâm đến tương lai. 
+- Kiểu như lúc nào cũng chỉ trực trực , hy vọng nó sẽ được cái kết quả tốt 
+nhất khi mà mình đã đưa ra lựa chọn tốt nhất ở mỗi bước rồi. 
+
+- Trong một nhà sách đang bán một bộ sách gồm n cuốn sách ,mỗi cuốn sách có 
+giá là a[i] . Nhà sách đang có ưu đãi là mua 3 cuốn giảm thì miễn phí cho 
+quyển sách rẻ nhất 
