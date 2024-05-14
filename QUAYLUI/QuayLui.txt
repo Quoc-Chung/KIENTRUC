@@ -1,0 +1,252 @@
++ Quay lui hoán vị (Backtracking Permutations): 
+    + Mục tiêu là tìm tất cả các hoán vị của một tập hợp. 
+    + Mỗi bước, chúng ta chọn một phần tử từ tập hợp còn lại(Tập hợp chưa được chọn ) và thêm vào danh
+    sách hoán vị, sau đó đệ quy để tìm các hoán vị của tập hợp còn lại. 
+    + Khi không còn phần tử nào nữa, ta đã tạo ra một hoán vị mới.
+    + Ví dụ chúng ta có một tập hợp { a,b,c } thì mục tiêu của ta là tìm ra tất cả các hoán vị của tập 
+    hợp này là :
+    a b c 
+    a c b 
+    b a c 
+    b c a 
+    c a b 
+    c b a 
+
+    + Mỗi bước, chúng ta sẽ chọn ra một phần tử từ tập hợp còn lại và thêm vào danh sách hoán vị. 
+
+- Cho số nguyên dương N. Nhiệm vụ của bạn là hãy liệt kê 
+ra tất cả các hoán vi của 1, 2, ...N. Ví dụ với N = 3 ta se 
+có kết quả :
+N = 3 :  
+    123
+    132
+    213
+    231
+    312
+    321
+N = 2 
+    12 
+    21 
+
+- Với bất cứ một cấu hình X nào nó sẽ bao gồm các số chạy 
+từ 1 cho đến n (Bộ lựa chọn sẽ chạy từ 1 cho đến n ).
+=> Bước làm đầu tiên ta phải nhìn được các khả năng của một 
+bộ kết quả(Khả năng của j ) sẽ gồm các só như nào, chạy từ 
+đâu đến đâu. 
+- Ở bài này thì các khả năng j sẽ chạy từ 1 cho đến n. 
+- Một thằng được chọn thì phải loại thằng lồn đó đi không 
+lấy lại thằng đó nữa, tức là dung một cái mảng check để đánh 
+dấu là đã dùng rồi nên không dùng lại nữa.  
+
+
+void Try(int i ){
+    for (int j = 1; j<=N;j++){
+        - Chưa được chọn để đưa vào-
+        if( check[j] ==0){
+            - Đánh dấu là đã được chọn - 
+            check[j] = 1;
+            a[i] = j;
+            - Nếu đã đủ kích thước của một thằng thì out() nó ra- 
+            if(i == n){
+                - In hết cái thằng trong bộ chọn ra-
+                out();
+            }
+            else {
+                - Tìm các khả năng cho thằng tiếp theo- 
+                Try(i+1);
+            }
+            check[j] = 0; 
+
+        }
+    }
+}
+
+- Với n = 3 
++ Ban đầu, chúng ta gọi hàm Try(1) để bắt đầu quá trình quay 
+lui. 
+  
+Try(1)*
+for ( j = 1; j <=3;j++){
+    if(check[1] ==0){
+        - Phần tử "1" đã được chọn -
+        check[1] = 1; 
+        a[1] = 1 
+
+        - Tiếp tục thử phần tử tiếp theo -
+        Try(2)*
+        for (j=1;j<=3;j++){
+            if(check[1] == 1){ ... }
+
+            if(check[2] == 0){
+                - Phần tử "2" đã được chọn -
+                check[2] = 1; 
+                a[2] = 2; 
+
+                - Tiếp tục thử phần tử tiếp theo -
+                Try(3)*
+                for (int j = 1;j <= N;j++){
+                    if(check[3] ==0){
+                        check[3] = 1;
+                        a[3] = 3; 
+
+                        - Đủ kích thước, in ra -
+                        IN RA: 123
+
+                        check[3] = 0; // Kết thúc Try(3)
+                    }
+                }
+                ---------------------------------
+
+                check[2] = 0; // Kết thúc Try(2), cấu hình là 13, và số chưa được chọn là 2 
+            }
+            if(check[3] = 0){
+                check[3] = 1; 
+                a[2] = 3; 
+                - Chưa đủ cấu hình nên tiếp tục - 
+                Try(3)* 
+                for (1..3) 3 được chọn , 1 được chọn thì chỉ còn 2 chưa được chọn thôi.   
+
+            }
+        }
+        check[1] = 0; // Kết thúc Try(1), cấu hình là 23, và số chưa được chọn là 1
+    }
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------
+Với N = 3 
+Try(i = 1){
+     for (int j=1;j<=3;j++){
+        if(check[1] ==0){
+                    check[1] =1
+                    a[1] = 1;
+                    - chưa đủ cấu hình - 
+                    Try(i =2 ){
+                        for (int j=1;j<=3;j++){
+                               if(check[1] == 0){
+                                        - đã thành 1 ở hàm đệ quy Try(1) rồi nên bỏ qua - 
+                               }
+                               if(check[2] == 0){
+                                        check[2] == 1;
+                                        a[2] = 2; 
+                                        - chưa đủ cấu hinh
+                                        Try( i = 3){
+                                                 for (int j=1;j<=3;j++){
+                                                            if(check[1] == 0){
+                                                                 - đã thành 1 ở hàm đệ quy Try(1) nên bỏ qua
+                                                            }
+                                                            if(check[2] == 0){
+                                                                 - đã thành 1 ở hàm đệ quy Try(2) nên bỏ qua 
+                                                            }
+                                                            if(check[3] == 0){
+                                                                  check[3] =1 
+                                                                  a[3] = 3;
+                                                                  if(i ==n){
+                                                                         IN RA : 1 2 3 
+                                                                  }
+                                                                  check[3] = 0                    
+                                                            }
+                                                 }
+                                            
+                                        }
+                                        check[2] = 0 
+                               }
+                               if(check[3] ==0){
+                                        check[3] =1;
+                                        a[2] = 3; 
+                                        - chưa đủ cấu hình nên tiếp tục gọi - 
+                                        Try(3){
+                                               for (int j=1;j<=3;j++){
+                                                            if(check[1] == 0){
+                                                                  - đã thành 1 khi ở Try(1) nên bỏ qua -  
+                                                            }
+                                                            if(check[2] == 0){
+                                                                   check[2] =1;
+                                                                   a[3] =2;
+
+                                                                   - Đã đủ cấu hình rồi nên in ra - 
+                                                                   IN RA :  1 3  2
+
+                                                            }
+                                                            if(check[3] == 0){
+                                                                   - đã thành 1 ở hàm đệ quy Try(2)
+                                                            }
+                                               }
+                                        }
+                               }
+                        }
+                    }
+        }
+        if(check[2] ==0){
+
+        }
+        if(check[3] ==0){
+
+        }
+        
+
+     }
+}
+--------------------------------------------------------------------------------------------------------
+- Mỗi một vòng lặp phải chạy hết cả 3 lần if () thì tương ứng sẽ in được ra chính xác các kết quả 
+
+- Sau mỗi một lần đệ quy thì chúng ta phải cho số truyền vào đệ quy đó chưa được đánh dấu lại. 
+ 
+********************* ĐOẠN CODE ***************************
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int MAX_N = 10; // Định nghĩa giá trị tối đa của N
+
+int a[MAX_N]; // Mảng để lưu tổ hợp
+int check[MAX_N]; // Mảng để đánh dấu phần tử đã được chọn
+
+void out(int n) {
+    // In ra tổ hợp hiện tại
+    for (int i = 1; i <= n; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+}
+
+void Try(int i, int n) {
+    // Nếu i đạt đến kích thước của tổ hợp
+    if (i > n) {
+        // In ra tổ hợp và kết thúc hàm
+        out(n);
+        return;
+    }
+    
+    // Duyệt qua tất cả các phần tử từ 1 đến N
+    for (int j = 1; j <= n; j++) {
+        // Nếu phần tử chưa được chọn
+        if (check[j] == 0) {
+            // Đánh dấu là đã chọn
+            check[j] = 1;
+            // Gán phần tử vào vị trí thứ i trong tổ hợp
+            a[i] = j;
+            // Thử tất cả các khả năng cho phần tử tiếp theo
+            Try(i + 1, n);
+            // Quay lui: Bỏ đánh dấu đã chọn của phần tử j để thử các khả năng khác
+            check[j] = 0;
+        }
+    }
+}
+
+int main() {
+    int N = 3; // Số lượng phần tử
+    Try(1, N); // Bắt đầu từ vị trí 1
+    return 0;
+}
+
+-----------------------------------------------------------------------------------------------------------
+
++ Quay lui nhị phân (Backtracking Binary): Trong loại này, mục tiêu là tìm tất cả các dãy nhị phân độ dài n. Mỗi bước, chúng ta thử gán giá trị 0 hoặc 1 cho vị trí tiếp theo trong dãy nhị phân và đệ quy để tìm các vị trí còn lại. Khi đã đạt đến cuối dãy, chúng ta đã tạo ra một dãy nhị phân mới.
+
+Quay lui tổ hợp (Backtracking Combinations): Trong loại này, mục tiêu là tìm tất cả các tổ hợp k phần tử từ một tập hợp n phần tử. Mỗi bước, chúng ta chọn một phần tử từ tập hợp còn lại và thêm vào danh sách tổ hợp, sau đó đệ quy để tìm các tổ hợp k - 1 phần tử còn lại từ tập hợp đã bỏ đi phần tử đó. Khi đã chọn đủ k phần tử, chúng ta đã tạo ra một tổ hợp mới.

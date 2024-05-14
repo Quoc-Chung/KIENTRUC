@@ -1,0 +1,118 @@
+- Phương pháp chia để trị : 
+Chia: Chia mảng A thành 2 phần và tiếp tục chia 
+các mảng con cho tới khi chúng chỉ còn 1 phần tử
+Trị: Tìm phần tử lớn nhất của các mảng con bằng
+phương pháp đệ quy
+
+- Phương pháp giảm để trị : 
+Trường hợp đặc biệt của chia để trị
++ Quy về đúng một bài toán nhỏ hơn
++ Có ba chiến lược
+◦ Giảm bởi một hằng số
+◦ Giảm bởi một hệ số
+◦ Giảm kích thước của biến/Chia cắt 
+
+- Tìm kiếm nhị phân sử dụng phương pháp giảm để trị ( Cụ thể 
+ở đây là giảm kích thước của biến ). 
+
+So sánh x với phần tử ở giữa mảng A[n/2]
+ Nếu x = A[n/2]  trả về vị trí của A[n/2]
+ Nếu x < A[n/2]  tìm kiếm trên A[0, 1, …, (n/2)-1] (trái)
+ Nếu x > A[n/2]  tìm kiếm trên A[(n/2)+1, …, n-1] (phải)
+
+- Mỗi bước tìm kiếm sẽ loại bỏ ít nhất một nửa phần tử của mảng. 
+
+
+- Đoạn mã trên sử dụng phương pháp chia để trị (divide and conquer) để tìm 
+giá trị nhỏ nhất trong mảng. 
+- Kỹ thuật này phân chia một bài toán lớn thành các bài toán nhỏ hơn, giải 
+quyết từng bài toán nhỏ đó, sau đó kết hợp kết quả để tìm ra kết quả cuối cùng.
+
+- Cụ thể, hàm FindMin được triển khai như sau:
+
++ Nếu left và right trùng nhau (nghĩa là chỉ còn một phần tử), chúng ta trả về 
+giá trị của phần tử đó.
+
++ Ngược lại, chúng ta chia mảng thành hai phần bằng cách tính giá trị mid là 
+trung bình của left và right.
++ Chúng ta sử dụng đệ quy để tìm giá trị nhỏ nhất trong mỗi phần của mảng, 
+sau đó so sánh và trả về giá trị nhỏ nhất của hai phần đó.
+
++ Do đó, đoạn mã này sử dụng kỹ thuật chia để trị để tìm giá trị nhỏ nhất
+ trong mảng, không phải giảm dần để trị.
+
+-------------------------------------------------------------------------------------------------
+
+Đúng, đoạn mã này sử dụng thuật toán tìm kiếm nhị phân, một phương pháp hiệu quả để tìm kiếm một
+phần tử trong một mảng đã được sắp xếp.
+
+Hàm Timkiemnhiphan và Tim_Kiem_Nhi_Phan đều triển khai thuật toán tìm kiếm nhị phân.
+
+Trong hàm Timkiemnhiphan, ta sử dụng vòng lặp while để tìm kiếm giá trị search trong mảng đã cho a từ vị trí left đến right. Ta chia mảng thành các phần nhỏ và chỉ di chuyển chỉ số left và right để thu hẹp phạm vi tìm kiếm cho đến khi tìm thấy giá trị cần tìm hoặc phạm vi tìm kiếm thu hẹp đến khi không còn phần tử nào.
+
+Trong hàm Tim_Kiem_Nhi_Phan, ta sử dụng phương pháp tìm kiếm nhị phân đệ quy. Tương tự như hàm 
+Timkiemnhiphan, ta chia mảng thành các phần nhỏ và thực hiện tìm kiếm giá trị target trong phần
+ mảng con từ vị trí left đến right. Nếu tìm thấy giá trị, ta trả về vị trí của nó. Nếu không, 
+ ta tiếp tục đệ quy vào mảng con bên trái hoặc bên phải của vị trí mid cho đến khi tìm thấy hoặc 
+ không còn phần tử nào.
+
+Cả hai hàm đều sử dụng phương pháp giảm để trị (divide and conquer) để tìm kiếm giá trị trong mảng, 
+không phải giảm đê trị.
+--------------------------------------------------------------------------------------------------
+
+
+int FindMin( int a[] ,int left,int right){
+    if(left == right ){ 
+        return a[left]; // Phần tử duy nhất
+    }
+    else {
+        int mid  = (left + right )/2;
+        int x = FindMin(a,left,mid); 
+        int y = FindMin(a,mid+1,right);
+        
+        return min(x,y);
+    }
+}
++ Với mảng có kích thước là :             6 
+                      - Giá trị :         2  5  4  1  6  3 
+                      - Vị trí  :         0  1  2  3  4  5
+
+int Min(a, 0,5){
+    else{
+        int mid = (5/2) = 2  --> 
+        int x = min (0,2) 
+                int mid = 1 
+                int x = min(0,1)  
+                         int mid = 0 
+                         int x = min(0,0); -> Trả về a[0] = 2 KT   -> Trả về 2 
+                         int y = min(1,1)  -> Trả về a[1] = 5 KT   
+
+                         => return  2 
+                int y = min(2 ,2)   -> Trả về a[2] = 4           -> Trả về 4 
+
+
+                => return 2 
+
+
+
+        int y = min (3, 5)
+                int mid = 4 
+                int x = min(3, 4); 
+                         int mid = 3 
+                         int x = min(3,3);  -> Trả về a[3] = 1   KT  -> 1 
+                         int y = min ( 4,4) ->  Trả về a[4] = 6  KT  -> 6 
+
+                         => return 1 
+                int y = min (5,5) -> Trả về kết quả a[5] = 3   -> return 3 
+
+                => return 1 
+    }
+}
+-> Kết quả cuối cùng sẽ trả về return 1. 
+
+
+
+
+
+
+

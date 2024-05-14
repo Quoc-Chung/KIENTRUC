@@ -1,0 +1,74 @@
+- Thuật toán liệt kê các dãy nhị phân có độ dài N: 
+- Ví dụ cho số tự nhiên N : 
+2
+2    00 01 10 11 
+3    110  001 010 011 100 101   
+
+- Ban đầu lúc nào ta cũng phải xác định cấu hình của bài toán 
+nó sẽ gồm những gì , ở đây thì nó sẽ gồm hai số 0 và 1 với 
+kích thước n; 
+- Bộ não của thuật toán backtrack : 
+
+    void  BACK_TRACK(int i){
+        for (int j= <khả năng 1> ; j <=n ; j++){
+            if(<chấp thuận khả năng j>){
+                x[i] = <Khả năng j> ; 
+                if( i == n){
+                    IN_RA_CẤU_HÌNH();
+                }
+                else{
+                    BACK_TRACK(i+1);
+                }
+            }
+        }
+    }
+
+    void Try(int i){
+        for (int  j  = 0;j<=1;j++){
+            x[i] = j; 
+            if( i == n){
+                IN_RA_CAU_HINH();
+            }
+            else{
+                Try(i+1);
+            }
+        }
+    }
+
+- Với n = 3;
+Try(i = 1){
+    for (int j = 0; j<=1;j++){
+            x[1] = 0;
+            - Chưa đủ cấu hình - 
+            Try(2){
+                  for(int j=0;j<=1;j++){
+                            x[2]=0;
+                            - Chưa đủ cấu hình 
+                            Try(3){
+                                  for(j = 0;j<= 1;j++){
+                                    x[3] = 0;
+                                    - đủ cấu hình rồi - 
+                                    IN RA : 000 
+                                    }
+                                    x[3] = 1;
+                                    - đủ cấu hình rồi - 
+                                    IN RA : 001 
+                            }
+
+                            x[2] =1; 
+                            - Chưa đủ cấu hình - 
+                            Try(3){
+                                for (int i =0; i<=1;i++){
+                                    x[3] = 0 
+                                    - đủ cấu hình rồi - 
+                                    IN RA  : 010 
+                                    x[3] = 1; 
+                                    IN RA : 011
+                                }
+                            }      
+                  }
+            } 
+    }
+}
+
+

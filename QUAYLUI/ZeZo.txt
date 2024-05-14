@@ -1,0 +1,8 @@
+Bài 2: Biểu thức zero
+- Cho một số tự nhiên N ≤ 9. Giữa các số từ 1 đến N hãy thêm 
+vào cácdấu + và – sao cho kết quả thu được bằng 0. 
+- Hãy viết chương trình tìmtất cả các khả năng có thể.
+- Dữ liệu vào: Lấy từ file văn bản ZERO.INP với một dòng ghi
+số N.
+- Dữ liệu ra: Ghi vào file văn bản có tên ZERO.OUT có cấu 
+trúc

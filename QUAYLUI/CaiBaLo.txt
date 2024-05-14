@@ -1,0 +1,5 @@
+- Cho trọng lượng  W và  n loại đồ vật  , mỗi đồ vật i có trọng lượng g[i] và một giá trị v[i] - 
+
+=> Số lượng mỗi đồ vật là không hạn chế 
+
+- Tìm cách lựa chọn các đồ vật sao cho tổng trọng lượng không vượt quá W và tổng giá trị là lớn nhất 

@@ -1,0 +1,112 @@
+- Mã đi tuần là một bài toán tìm đường đi cho con mã 
+có thể đặt chân tới tất cả các điểm trên bàn cờ với mỗi
+vị trí con mã chỉ được đi đến duy nhất một lần. 
+
+- Ý tưởng của bài toán này là dùng thuật toán BackTracking. Ý tưởng khá 
+đơn giản , khi bạn đứng trước 2 con đường, bạn sẽ chọn 1 đường đê đi 
+nếu đường đó là đường cục , bạn quay lại vị trí ban đầu và đi đường thứ 
+hai. 
+
+- Sử dụng thuật toán quay lui để đi đến tất cả các vị trí trên bàn cờ.
+- Nếu con mã đi vào một vị trí mà nó không thể đi tiếp ( Tức là những 
+điểm nó có thể đi từ điểm hiện tại đã được đặt chân đến đến rồi ) 
+thì quay lại vị trí trước đó và lựa chọn con đường khác. 
+
+- Việc lặp lại này sẽ diễn ra liên tục cho đến khi tất cả các điểm 
+trên bàn cờ đã được đi tới. 
+
+----------------------------------------------------------------- 
+
+- Bài toán yêu cầu một quân mã đi hết 64 vị trí và phải đi qua hết 
+tất cả các ô này mà không đi trùng 
+- Những ô nó đi qua này mà nó đi xâu qua cái ô này thì . 
+
+- gọi cái hàng là trục x , cái cột là trục y 
+
+- Trị tuyệt đối của x và trị tuyệt đối của y cộng lại sẽ là 3 
+
+=> Một quân mã đi từ vị trí 5 5 sang vị trí 4 3  thì tổng cái sự thay 
+đổi ở đây công lại nó sẽ là 3. (Trị tuyệt đối x + trị tuyệt đối y là 8 cách )
+( giảm số hàng đi 1 và giảm số cột đi 2 )
+
+#include<bits/stdc++.h>
+
+#define MAX 8
+using namespace std; 
+// x[i] , y[i] 0 <i <= 7 
+
+// Tạo một cái ma trận đánh dấu đi qua , ban đầu là  0 tức là quân 
+// mã chưa đi qua cái ô nào hết  
+
+// x ,y là vị trí hiện tại của quân mã thì quân mã đi theo một cái 
+// đường  x+ x[i] và y + y[i] : Một vị trí sau khi di chuyển hợp lệ 
+// là nó thỏa hai tính chất  
+// 0 <= x + x[i] <= n -1   , 0 <= y + y[i] <=n-1 
+// -> Đi đúng  : a[x+x[i] , y +y[y]]; 
+
+int a[MAX][MAX] = { 0};  
+
+- Ta nhận thấy được từ một vị trí này di chuyển sang một vị trí khác 
+thì quân mã đi theo hình chữ l và tổng trị tuyệt đối sự thay đổi vị trí 
+sẽ luôn bằng 3 nên mình sẽ đặt mảng có các phần tử như này ứng với sự thay 
+đổi thỏa mãn. 
+
+int X[8] = { -2,-2,-1,-1,1,1,2,2};
+int Y[8] = { -2,-2,-1,-1,1,1,2,2};
+int n;
+
+int dem = 0;
+void Xuat(){
+    for (int i=0;i<n;i++){
+        for (int j=0;j<n;j++){
+            cout << a[i][j]<<" ";
+        }
+        cout <<endl;
+    }
+}
+/* - Hàm kiểm tra cách di chuyển của quân mã  - */
+
+/* - HÀm tìm vị trí hợp lệ ban đầu nếu khi nó */
+
+void Move(int x,int y){
+    ++dem;
+    a[x][y] = dem;
+    /* - Kiểm tra quân mã đi hết bàn cờ chưa - */
+    for (int i =0;i<8 ;i++){
+        if(dem == n * n){
+             cout << " Cac buoc da di : "<<endl;
+             Xuat();
+             exit(0);
+        }
+    
+    
+    // Sự thay đổi của quân mã so với trục X ;
+    int u = x + X[i];
+    int v = y + Y[i];
+
+    // u và v phải nằm trong giới hạn của bàn cở và quân mã chưa đi đến vị 
+   // trí a[u][v]; 
+    if(u >=0 && u < n && v >= 0 && v <=n & &a[u][v] == 0){
+         Move(u,v);
+        
+      }
+    }
+    // Giảm cái đếm này nếu như mình không tìm được bước đi phải trả về giá trị ban 
+    // đầu cho nó  không thì nó sẽ không thể quay lui lại.
+    dem --; 
+    a[x][y] = 0;
+    // Sau khi cho đi xong nếu như 
+}
+
+int main(){
+      cout << "\nNhap kich thuoc n :"; 
+      cin >> n; 
+
+      int a,b; // a ,b là vị trí ban đầu của quân mã 
+      cout << "\nNhap vi tri ban dau  :";
+      cin >> a >>b ;
+
+      cout <<" ( " << a << " , " << b << ")";
+      Move(a,b);
+      cout << "Khong tim duoc duong di.";   
+}

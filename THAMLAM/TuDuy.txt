@@ -1,0 +1,108 @@
+- Tư duy của bài chọn lớp là chọn những môn có thời gian kết thúc sớm nhất thì sé có nhiều thời 
+gian cho những môn sau => Chọn được nhiều môn hơn . 
+
+5
+6   7
+7   9
+8   10
+10  12
+9   11 
+
+-  Sử dụng một hàm comparator sắp xếp các môn học theo thứ tự tăng 
+dần của thời gian kết thúc 
+
+6  7
+7  9
+8  10
+9  11
+10 12
+
+
+- Lấy ra số lương môn học trong danh sách các môn học - 
+
+- Sử dụng một vector pair mới đề lưu trữ các kết quả - 
+
+- Thêm môn học kết thúc đầu tiên vào  vì nó luôn là đúng 
+
+- Tiếp theo duyệt theo qua các môn học từ môn tiếp theo đến cuối 
+
+- Nếu xuất hiện môn học nào có thời gian bắt đầu >= thời gian kết thúc 
+của môn học trước thì chọn . 
+
+
+===============================================================
+
+ N số nguyên dương
+ B Kích thước thùng
+ A1, . . ., AN kích thước N vật Ai <= B.
+ Output
+ Số thùng ít nhất chứa tất cả các vật
+
+ for (int i = 0; i < n; i++) {
+        /* - Kiểm tra đồ vật hiện tại đc đạt vào thùng nào chưa - */
+        bool TimThay = false;
+        for (int j = 0; j < SoThung; j++) {
+            if (TongMang(Thung[j]) + a[i] <= B) {
+                Thung[j].push_back(a[i]);
+                TimThay = true;
+                break;
+            }
+        }
+        if (TimThay== false) {
+            Thung.push_back({a[i]});
+            SoThung++;
+        }
+    }
+   
+- Sắp xếp các phần tử kích thước của N vật theo số lượng giảm dần  
+
+- Tạo thêm một cái vector mà mỗi phần tử nó lại tính như một cái thùng riêng để đựng các đồ vật  
+= Duyệt qua kích thước của n đồ vật  
+
+- Ban đầu thì chưa có đồ vật nào được thêm vào thùng nên là đánh dấu đồ vật hiện tại chưa thể đặt 
+vào đồ vật nào.  
+
+- Thêm đồ vật đầu tiên vào thùng đầu tiên 
+- Giờ thì một thùng đã được tạo nên số thùng sẽ tăng thêm 1 là điều đương nhiên thôi.
+
+- Tiếp theo đã tạo được thùng rồi thì ta sẽ duyệt qua các thùng xem thùng nào đủ sức chứa thì nhét nó vào là xong 
+
+
+
+
+
+
+
+ 10
+ 7 
+ 8 6 5 3 2 2 1 
+
+    
+Thùng 1: 8
+Thùng 2: 6 2 
+Thùng 3: 5 3 2 
+Thùng 4: 1 2 
+
+----------------------------------------------------------------
+- Bài toán đóng thùng tham lam theo một cái thứ tự nào đó  
+
+6
+
+6
+3  2 5 2 4 3 
+
++ Them làm theo kishc thước đồ vật bé nhất trước  ( 1,2,3,3,4,5 )
+
++ Thùng 1 : (1,2,3)
++ Thùng 2 : (3)
++ Thùng 3: (4) 
++ Thùng 4 (5)
+
+
++ Tham lam theo kích thước đồ vật lớn nhất trước ( 5,4,3,3,2,1)
+
++ Thùng 1: 5 
++ Thùng 2 : 4 2 
++ Thùng 3  : 3, 3
+
+

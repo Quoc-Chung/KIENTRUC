@@ -1,0 +1,42 @@
+// Hàm tìm số tờ tiền nhỏ nhất cần thiết để đổi n đồng
+int SoToNhoNhat(vector<int>& coins, int n) {
+    int m = coins.size();
+    vector<int> dp(n + 1, INT_MAX); // Tạo một mảng dp có kích thước (n+1) và gán giá trị mặc định là INT_MAX
+    dp[0] = 0; // Trường hợp cơ sở: không cần tờ tiền nào để đổi 0 
+
+    - Lặp qua từng phần tử trong mảng 
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (coins[j] <= i && dp[i - coins[j]] != INT_MAX) {
+                // Nếu mệnh giá của tiền thứ j nhỏ hơn hoặc bằng i 
+                // và có cách đổi i - coins[j] đồng
+                // thì cập nhật dp[i] bằng giá trị nhỏ hơn giữa dp[i] hiện tại và dp[i - coins[j]] + 1
+                dp[i] = min(dp[i], dp[i - coins[j]] + 1);
+            }
+        }
+    }
+    return dp[n]; // Trả về số tờ tiền nhỏ nhất cần thiết để đổi n đồng
+}
+
+- Trường hợp cơ sở : Không cần tờ tiền nào để đổi tờ tiền  0  đồng. 
+
+- Tiếp theo ta khởi tạo bảng quy hoạch với kích thước n + 1 
+
+
+int SoToNhoNhat(int coins[],int m,int n) {
+    int dp[n+1]; - Mảng tiền 
+    - Mảng dp[] lưu trữ số lượng tờ tiền đổi ít nhất - 
+    dp[0] =0; 
+    - Lặp qua mảng tiền  
+    for (int i = 1; i<=n;i++) {
+        dp[i] = INT_MAX; - gán dp[i] là phần tử max- 
+
+        - Lặp qua 
+        for (int j = 0; j<m; j++) {
+            if (coins[j]<=i&&dp[i - coins[j]] != INT_MAX) {
+                dp[i] = min(dp[i], dp[i-coins[j]] + 1);
+            }
+        }
+    }
+    return dp[n]; 
+}

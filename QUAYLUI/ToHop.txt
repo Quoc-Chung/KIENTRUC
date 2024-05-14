@@ -1,0 +1,311 @@
+Để tính tổ hợp chập k của n trong C++, bạn có thể sử dụng công thức toán học cho tổ hợp:
+
+Tổ hợp chập k của n (kết hợp không lặp lại) được tính bằng công thức:
+
+- Bài toán: Cho tập S=1,2,3,…,n
+. In ra tất cả các tập con có chính xác k
+ phần tử của S
+. Hai tập con là hoán vị của nhau chỉ tính là một.
+
+C(n,k) = n! / k!*(n-k)! 
+
+Trong đó:
+ + (n−k)! là giai thừa của n trừ k
+
+#include <iostream>
+// Hàm tính giai thừa
+unsigned long long factorial(int n) {
+    if (n <= 1)
+        return 1;
+    else
+        return n * factorial(n - 1);
+}
+// Hàm tính tổ hợp chập k của n
+unsigned long long combination(int n, int k) {
+    return factorial(n) / (factorial(k) * factorial(n - k));
+}
+
+int main() {
+    int n, k;
+    cout << "Nhap gia tri cua n: ";
+    cin >> n;
+    cout << "Nhap gia tri cua k: ";
+    cin >> k;
+
+    if (k > n)
+        cout << "Loi: k phai nho hon hoac bang n." << endl;
+    else
+        cout << "Tong hop chap " << k << " cua " << n << " la: " << combination(n, k) << endl;
+    return 0;
+}
+-----------------------------------------------------------------------------------------------
+- Ý nghĩa của công thức tổ hợp dùng để tính só cách lựa chọn 
+một nhóm k phần tử từ một tập hợp gồm n phần tử, với điều 
+kiện rằng thứ tự trong nhóm không quan trọng và mỗi phần tử 
+chỉ được chọn một lần. 
+
+- Mỗi một thành phần trong sinh tổ hợp nó lại có các lựa 
+chọn khác nhau, tuy nhiên thì nó có quy luật của nó. 
+- Ví dụ :
+
+1 
+5  3  
+
+123 124 125 134 135  145  234  235 245  345  
+( Tổ hợp chập 3 của 5) -> Tức là với các số với tổ hợp 
+chập 3 của các số từ 1 đến 5 , tức là tất cả các cách 
+chọn 3 số từ 1 đến 5 mà không quan trọng thứ tự. 
+- Bắt đầu với số 1: 1
+- Chọn tiếp theo từ 2 đến 5:
+2: 12
+3: 13
+4: 14
+5: 15
+- Với mỗi số đã chọn, chọn số tiếp theo trong tập hợp không chứa số đã chọn trước đó:
+Từ 2: 123, 124, 125
+Từ 3: 134, 135
+Từ 4: 145
+Từ 5: 234, 235
+- Và tiếp tục như vậy cho đến khi chọn đủ 3 số.
+Kết quả là tất cả các tổ hợp chập 3 của các số từ 1 
+đến 5 là: 
+    123,
+    124,
+    125, 
+    134, 
+    135,
+    145,
+    234,
+    235,
+    245,
+    345.
+
+- x(i-1) + 1 <= xi <= n-k+i 
+
+- Gọi X là một cấu hình cần liệt kê ra của tập con k phần tử. 
+=> X có k vị trí , ai là một vị trí của cấu hình X ( 1 <= i <= k)
+
+- max_1 = n - k + i  = 5 - 3 + 1 = 3 ;
+  max_2 = n - k + i  = 5 - 3 + 2 = 4 
+  max_3 = n - k + i  = 5 - 3 + 3 = 5
+
+--> Cận trên chỉ có thể là  n - k + i 
+--> Cận bên dưới thì luôn nhỏ hơn cái trước nó một đơn 
+vị. 
+
+- Tại các vị trí trong mỗi phần tử của bộ số được liệt kê ra
+vị trí sau luôn lớn hơn vị trí trước nó ít nhất một đơn vị. 
+
+- Ta gán cho vị trí đầu tiên các giá trị từ 1 -> (n-k+1). 
+- Ta lại gán giá trị cho vị trí thứ hai bắt đầu từ x1 + 1 -> n - k + i ( n - k + 2)
+
++ Ban đầu ta duyệt từ x[0] + 1 là có lí do của nó vì x[0] = 0 
+
+void Try(int i){
+    for (int j = x[i-1] + 1 ; j<=n-k+i;j++){
+        x[i] = j;
+        if(i ==k){
+           IN_RA_CAU_HINH();  
+        }
+        else {
+            Try(i+1);
+        }
+    }
+}
+
+- Tổ hợp chập 5 của 3 : 
+
+void Try( i = 1){
+    for (int j = x[0] + 1 ; j <= 3;j++){ -> j = 1 ... 2.... 3 
+               x[1]  = 1;
+               - chưa đủ cấu hình - 
+                Try( i =2 ){ 
+                    for (j =x[1] + 1 ; j<= 4;j++){
+                                x[2] = 2;
+                                - chưa đủ cấu hình 
+                                Try( i = 3){
+                                    for (int i= x[2] + 1; j<=5;j++){
+                                        x [3] =  3; 
+                                        - Đã đủ cấu hình - 
+                                        IN RA : 123 
+
+
+                                        x[3] = 4 ;
+                                        - Đã đủ cấu hình - 
+                                        IN RA : 124 
+
+                                        x[3] = 5; 
+                                        - Đã đủ cấu hình - 
+                                        IN RA : 125 
+                                    }
+                                }
+                               
+                                x[2] = 3;
+                                - Chưa đủ cấu hình - tức là i < k  
+                                Try( i = 3){
+                                    for (int j =x[2] +1(4) ;j<= 5 ;j++){
+                                         x[3] = 4 ;
+                                         - Đã đủ cấu hình - 
+                                         IN RA : 134 
+
+                                         x[3] = 5 
+                                         - Đã đủ cấu hình -  
+                                         IN RA : 135 
+                                    }
+                                }
+
+                    }
+                }
+    }
+}
+
+
+- Cái quan trọng nhất của những bài quay lui là : 
+
++  Phải xác định được cấu hình của chúng ta liên quan đến gì,kích thước như nào nó sẽ là cấu trúc của những cái gì : 
+
+     +  Hoán vị : Sẽ gồm các số từ 1 đến n vào tráo đổi lung tung 
+    
+     +  Nhị phân : Chỉ gồm các số 0 và 1 
+     
+     +  Gồm các số từ 1 đến n nhưng nó sẽ tuân theo một số nguyên tắc nhất định không liên quan đến nhau. 
+
+-> Từ đó sẽ phải biểu diễn vòng lặp j để biểu diễn các số này sao cho hợp lí. 
+
+- Tiếp theo chúng ta phải quan tâm đến việc đánh dấu xem các phần tử đã được thực hiện chưa , khi nào sẽ cần phải thực hiện. 
+
+- Cuối cùng ta rút ra được công thức của hàm quay lui này : 
+                               void  BACK_TRACK(int i){
+                                    for (int j= <khả năng 1> ; j <=n ; j++){
+                                        if(<chấp thuận khả năng j>){
+                                            x[i] = <Khả năng j> ; 
+                                            if( i == n){
+                                                IN_RA_CẤU_HÌNH();
+                                            }
+                                            else{
+                                                BACK_TRACK(i+1);
+                                            }
+                                        }
+                                    }
+                                }
+                            
+- Bản chất của bài toán quay lui là sau khi biết các khả năng của một cấu 
+hình rồi thì chúng ta phải xét xem khả năng đó có được chấp thuận hay không 
+thì chúng ta mới đưa nó vào trong cấu hình. 
+
+----------------------------------------------------------------------
+ - Tổ hợp chập k phần tử X = {1, ..., n} là một tập con k phần tử 
+ của X. 
+
+ - Ví dụ k = 3, n = 4 , X = {1,2,3,4} ta có các tổ hợp : 
+      123
+      124
+      134
+      234
+
+- Bài toán dẫn về bài toán liệt kê các phần tử của tập S(k,n) 
+     S(k,n) = ({x1,..., x_k}) với 1 <= x1 <=... <X_k <= n  
+      
+
+- Xác định kích thước của cấu hình : (x1,x2,..., x_k) với x_(i-1) < x_i 
+( - Nghĩa là cái phần tử ở đằng sau luôn lớn hơn phần tử đứng trước nó)
+
+   1  
+   5  3  
+   123
+   124
+   125
+   134
+   135 
+   145
+   234
+   235 
+   245 
+   345  
+
+-  Từ điều kiện 1 <= x1 < x2 < ... < x_k <= n  , ta có tập ứng cử 
+viên cho vị trí thứ nhất ( các khả năng của x1 ) 
+S1 = {1,2,... , n -k - i} 
+
+- Mỗi một thành phần có một lựa chọn khác nhau 
+
+
+
+x_(i-1) + 1 <= x_i <= n - k + i 
+
+(Phần tử sau luôn nhỏ hơn phần tử phía trước ) 
+- Gọi X là một cấu hình cần liệt kê ra của tập con k phần tử 
+( Nên ta có X có sẽ k vị trí) 
+- a_i là một vị trí của cấu hình X ( 1 <= i <= k) 
+
+- max  1 = n - k + i = 5 - 3 + 1  = 3 
+( Vị trí thứ nhất của một phần tử có thể đạt giá trị lớn nhất là 3) 
+
+- max 2 = n - k + i = 5 - 3 + 2 = 4 
+( Vị trí thứ hai của một phần tử có thể đạt giá trị lớn nhất là 4 )
+
+- Tương tự vị trí thứ 3 của một phần tử có một giá trị lớn nhất là 5 
+
+
+- Để suy ra được cái này thì : 
+
++ Một cấu hình : x1.x2.x3....x_k mà x1 >= 1  và x_k <= n 
++ Tại các vị trị trong mỗi phần tử của bộ số được liệt kê ra , vị trí 
+sau luôn lớn hơn vị trí trước nó ít nhất 1 đơn vị. 
+
+
++   x_(i-1) + 1 <= x_i ( Phần tử sau luôn lớn hơn vị trí trước nó 
+ít nhất một đơn vị)  và ( đồng thời không muốn phần tử phía sau )
++   x_i <= phần tử sau - phần tử 
+------------------------------------------------------------------------------------------------------------------
+
+- Công thức x_(i-1) + 1 <= x_i <= n - k + i là một điều kiện giới hạn cho biến x_i trong bài toán liệt kê tổ hợp.
+- Để hiểu tại sao công thức này có thể suy ra từ bài toán liệt kê tổ hợp bằng phương pháp quay lui, chúng ta cần xem 
+xét cách tổ chức và cập nhật các giá trị trong quá trình quay lui.
+
+- Trong bài toán liệt kê tổ hợp, chúng ta cần tìm ra các tổ hợp k phần tử từ 1 đến n, sao cho không có phần tử nào được lặp lại. Quy trình quay lui thường được sử dụng để thử từng phần tử có thể cho vị trí kế tiếp của tổ hợp.
+
+- Khi quay lui từ phần tử thứ i-1 đến phần tử thứ i, chúng ta cần đảm bảo rằng phần tử thứ i có thể là bất kỳ giá trị nào 
+từ x_(i-1) + 1 đến n - k + i, với điều kiện x_i không vượt quá n - k + i (đảm bảo số phần tử còn lại đủ để tạo thành tổ hợp).
+
+- Giá trị nhỏ nhất của x_i cần phải lớn hơn hoặc bằng giá trị của phần tử trước đó (x_(i-1) + 1), vì ta không muốn phần tử sau
+lặp lại phần tử trước đó.
+- Giá trị lớn nhất của x_i phải nhỏ hơn hoặc bằng n - k + i, bởi vì chúng ta không thể có quá nhiều phần tử còn lại để chọn khi 
+đã chọn x_i (tổng số phần tử còn lại là n - i + 1, và phải đảm bảo số phần tử còn lại đủ để tạo thành tổ hợp k phần tử).
+Do đó, công thức x_(i-1) + 1 <= x_i <= n - k + i là một biểu thức hợp lý để đảm bảo rằng giá trị của x_i không vượt quá giới hạn
+cho phép trong quá trình liệt kê tổ hợp bằng phương pháp quay lui.
+
+void Try(int i){
+    for (int j = a[i-1] + 1 ; j<=n-k+i;j++){
+        a[i] = j;
+        if(i ==k){
+           IN_RA_CAU_HINH();  
+        }
+        else {
+            Try(i+1);
+        }
+    }
+}
+
+
+k  = 3 , n =  5 
+
+void Try(1){
+   for (int j= a[0] + 1 ; j<= 3 ; j++){
+         j = 1; 
+         a[1] = 1;
+         Try(2){
+              for (int j = a[1] + 1 ; j <= 5- 3 + 2; j++){
+                 j = 1 + 1; j <= 4 ; j++
+
+                 j = 2; 
+                 a[2] = 2; 
+                 
+              }
+         } 
+        
+
+
+
+   }
+}

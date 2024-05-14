@@ -1,0 +1,204 @@
+- B1 : Cấu hình cần tìm có dạng : (x1, x2, ... xk) với x_(i-1) <x_i 
+- B2 : Xác định các tập ứng cử viên cho vị trí thứ i ( Các khat năng của x_i ) là : 
+S_i = {}
+
+- B3 : Lặp qua tập ứng cử viên và thử từng ứng cử viên.
+-----------------------------------------------------------------------------------------------------
+- Giải thuật quay lui là một phương pháp giải quyết các bài 
+toán tìm kiếm hoặc liệt kê tất cả các cấu hình của một bài 
+toán. 
+
+- Đây là một phương pháp cơ bản trong lập trình thuật toán và 
+thường được áp dụng khi ta cần kiểm tra tất cả các trường hợp 
+có thể xảy ra một cách có hệ thống. 
+
+- Dưới đây là các bước cơ bản khi áp dụng giải thuật quay lui cho 
+một bài toán cụ thể: 
+
+1. Xem xem một cấu hình của bài toán sẽ bao gồm những thành phần 
+nào. Từ đó thì phải dùng một vòng for j để lặp qua các giá trị của 
+một cấu hình. 
+
+2. Nhìn vào kết quả đầu và kết quả cuối của một cấu hình để rút ra 
+được quy luật của bài toán. 
+
+3. Áp dụng công thức của hàm backtracking để giải quyết bài toán : 
+
+ void  BACK_TRACK(int i){
+        for (int j= <khả năng 1> ; j <=n ; j++){
+            if(<chấp thuận khả năng j>){
+                x[i] = <Khả năng j> ; 
+                if( i == n){
+                    IN_RA_CẤU_HÌNH();
+                }
+                else{
+                    BACK_TRACK(i+1);
+                }
+            }
+        }
+    }
+
+
+ void backtracking(int i) {
+    for(int j = 1; j <= n; j++) {
+        - Kiểm tra xem j có phù hợp để đưa vào cấu hình không
+        - Nếu phù hợp, tiến hành đánh dấu và xét bước tiếp theo
+        - Nếu không phù hợp, thử với lựa chọn khác
+
+        if(/* điều kiện */) {
+            a[i] = j;
+            - Nếu đã điền đủ phần tử vào cấu hình
+            - in ra và kết thúc
+
+            if(i == n) {
+                printConfiguration();
+            } else {
+                backtracking(i + 1); - Xét bước tiếp theo
+            }
+            - Quay lui: xóa đánh dấu để thử lựa chọn khác
+            - và tiếp tục với các phần tử khác
+        }
+    }
+}
+
+-------------------------------------------------------------- 
+- Phân tích backtracking : 
+backtracking (i) { 
+    for ( Mỗi j ){
+        if ( j thỏa tính chất P ){ 
+            Chọn j = x_i; 
+            /* - Đã xác định đủ n thành phần  - */ 
+            if( i == n){
+                - điền đưa ra kết quả tức là in ra kết quả  - 
+            }
+            else {
+                backtracking(i + 1); 
+                - bỏ chọn j cho x_i - 
+            }
+        }
+    }
+} 
+
+- Để xây dựng thuật toán quay lui , ta cần : 
++ Biết dạng của cấu hình cần tìm 
++ Độ dài của lời giải là không biết trước  
++ Các lời giải không nhất thiết phải có cùng độ dài 
++ Cần kiểm tra ( x1,x2, ... , x_k) đã là lời giải hay chưa 
+
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------
+
+- Các bước làm bài  liên quan đến 
+
+void IN_RA_CAU_HINH(){
+   for (int i=1;i<=n;i++){
+    cout << a[i];
+   }
+   cout<<endl;
+}
+/* - Sau mỗi lệnh if đánh dấu thì ta phải đánh dấu lại - */
+void Try(int i){
+   for (int  j =1; j<= n ;j++){
+       if(check[j] ==0){
+          check[j] = 1; 
+          a[i] = j;
+
+          if( i == n){
+            IN_RA_CAU_HINH();
+          }
+          else{
+            Try(i+1);
+        }
+        check[j] = 0;  
+       }
+   }
+}
+
+Duyệt các phần tử chạy từ 1 đến n -*/
+void Xuat(){
+   for(int i=1;i<=n;i++){
+     cout << x[i] <<" ";
+   }
+   cout << endl;
+}
+
+void HoanVi (int i){
+    for (int j = 1;j <= n;j++){
+        /* - Nếu một số chưa được đưa vào cấu hình - */
+          if(b[j] == 0){
+            x[i] =  j; 
+        /* - Sau khi đưa vào cấu hình thì nó sẽ đánh dấu -*/
+            b[j] = 1; 
+        /* - Tức là nó chạy quá tức là đã đủ cấu hình = */
+            if(i == n){
+                Xuat();
+            }
+            else{
+                HoanVi(i+1);
+            }
+            b[j] = 0;
+          }
+    }
+}
+
+#include<bits/stdc++.h>
+using namespace std;
+/* - Lưu trữ cấu hình - */
+int a[11];
+/* - Kích thước cấu hình - */
+int n;
+void IN_RA_CAU_HINH(){
+    for(int i=1;i<=n;i++){
+        cout <<a[i];
+    }
+    cout<<endl;
+}
+void Try(int i){
+    for (int j=0;j<=1;j++){
+        a[i] =j;
+        if(i == n){
+            IN_RA_CAU_HINH();
+        }
+        else{
+            Try(i+1);
+        }
+        
+    }
+}
+
+#include<bits/stdc++.h>
+using namespace std;
+/* - Tổ hợp chập k của n - */
+int n; 
+int k; 
+
+int a[11];
+void IN_RA_CAU_HINH(){
+    for (int i=1;i<=k;i++){
+        cout << a[i];
+    }
+    cout <<endl;
+}
+void Try(int i){
+    for (int j = a[i-1] + 1 ; j<=n-k+i;j++){
+        a[i] = j;
+        if(i ==k){
+           IN_RA_CAU_HINH();  
+        }
+        else {
+            Try(i+1);
+        }
+    }
+}

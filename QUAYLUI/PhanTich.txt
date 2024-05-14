@@ -1,0 +1,81 @@
+#include<bits/>stdc++.h>
+using namespace std;
+ 
+
+Try(1,n,0) 
+
+
+void Try (int i ,int k,int cursum ){
+   /* - Duyệt từng khả năng được chấp nhận - */ 
+    for (int j = k; j >= 1; j--){ 
+       
+        if(cursum + j <= n){
+            a[i] = j ;
+            cursum +=j; 
+            if(cursum == n){
+                  out(i);
+            }
+            else {
+                  Try(i+1,j,cursum);
+            }
+      /* -Tái tạo bài toán */ 
+            cursum -=j;    
+        }
+    }
+}
+
+
+
+void Try(1,4, 0){
+    for (int j=4;j>=1;j--){
+        j= 4;
+        if(cursum += 4 <=n){
+             a[1] = 4;
+             cursum += 4 = 4
+             if(cursum = 4){
+                IN_RA : 4 
+             }
+          }
+          cursum-= 4;
+        j = 3; 
+        if(cursum+=3 <= n){
+            a[1] = 3;
+            cursum+= 3 = 3 
+            if() => Chua đủ cấu hình 
+            else{
+                Try(2,3,3){
+                    for(int j=3;j>=1;j--){
+                        j = 3;
+                        if(cursum +=3 >n){
+
+                        }
+                        j = 2; 
+                        if(cursum +=2 > n){
+                           
+                        }
+                        j = 1;
+                        if(cursum +=1 <= n){
+                            a[2] = 1;
+                            cursum+= 1 = 4; 
+                            if(du cau hình){
+                                IN RA : 3 1 
+                            }
+                        }
+                        cursum-=1;
+
+                    }
+                }
+            }
+        }
+
+        j = 2;
+        if(cursum += 2 > n){
+            
+        }
+
+        
+
+
+        
+    }
+}

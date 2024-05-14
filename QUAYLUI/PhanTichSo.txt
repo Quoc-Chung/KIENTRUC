@@ -1,0 +1,63 @@
+- Phân tích số tức là từ một số ban đầu ta sẽ phân tích nó 
+ra thành tổng của các số nhỏ hơn nó. 
+
+- VD : n = 5 . Ta sẽ liệt kê tất cả các cách phân tích số tự 
+nhiên N thành tổng các số tự nhiên nhỏ hơn nó là : 
+
+(5)  (4,1) (3,2) (3,1,1) (2,2,1) (2,1,1) (1,1,1,1,1) 
+
+      n = 4 sẽ phân tích thành :
+
+(4)  (3,1) (2,2)  (2, 2 ,1) ( 1, 1 ,1 ,1)   
+
+- Để ý vào kích thước của từng cấu hình : Cấu hình thứ nhất
+sẽ có size =1 và cấu hình cuối sẽ có size = n 
+
+=> Kích thước của các cáu hình trong bài toán này là không giống 
+nhau nên cách làm chúng cũng phải khác đi .
+
+* MỘT SỐ ĐẶC ĐIỂM  : 
+
++  Tất cả các cái số khi chúng ta phân tích ra đều nhỏ hơn 
+hoặc bằng  N
++  các số ở đằng sau luôn nhỏ hơn hoặc bằng các cái số ở 
+đằng trước.
+
+* PHÂN TÍCH THUẬT TOÁN 
++  " int i " là thành phần thứ i của cấu hình (Tức là ta sẽ cho 
+ra một cấu hình khi nó xảy ra ba lần đệ quy).
++ Các thành phần của một cấu hình là khác nhau , điều đó dẫn 
+tới khả năng dành cho thành phần xi cũng khác nhau trong từng 
+cấu hình 
+
++ int k đại diện cho các khả năng dành cho thành phần xi, các khả 
+năng của từng thành phần khác nhau . Tại một cấu hình sẽ có bao nhiêu 
+khả năng  
+
++ Xem xét tại từng thành phân xi của cấu hình xem nó sẽ có bao nhiêu 
+khả năng. 
+
+
++ int cursum : Tổng hiện tại ,xét xem tổng của chúng có được 
+
+
+
+void Try (int i ,int k ,int cursum ){
+   /* - Duyệt từng khả năng được chấp nhận - */ 
+    for (int j = k; j >= 1; j--){ 
+         /* - Kiểm tra khả năng j được chấp thuận không - */ 
+        if(cursum + j <= n){
+            a[i] = j ;
+            cursum +=j; 
+            if(cursum == n){
+                  out(i);
+            }
+            else {
+                  Try(i+1,j,cursum);
+            }
+      /* -Tái tạo bài toán */ 
+            cursum -=j;
+                
+        }
+    }
+}

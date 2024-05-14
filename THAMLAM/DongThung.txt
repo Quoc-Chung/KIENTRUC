@@ -1,0 +1,20 @@
+- Duyệt qua từng phần tử trong các kích thước của đồ vật được sắp 
+xếp tăng dần  
+
+- Tao một cái biến bool kiểm tra xem tại phần tử thứ i thì có thể đưa 
+vào các thùng đã được tạo trước đó không  
+=> Tức là ta sẽ duyệt qua các thùng đã tồn tại sẵn và xem có thể nhét 
+cái thằng a[i] vào cái thùng nào đó có sẵn hay không 
+=> Trong trường hợp nhét được thì sẽ cho cái biến bool thành true 
+
+
+=> Trong trường hợp không nhét được thì chúng ta sẽ phải tạo thêm một 
+cái thùng mới để chứa cái thằng có kích thước a[i] mà hiện tại không 
+nhét được vào cái thằng có kích thước a[i] đó. 
+
+
+vector<vector<int> ThungChua; 
+
+ThungChua.push_back({a[i]});
+
+- Ta duyệt đến thùng thứ J mà thấy cái đồ vât j không thể  

@@ -1,0 +1,93 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n; // Số lượng thành phố
+vector<vector<int>> cost; // Ma trận chi phí
+
+// Hàm tìm hành trình ngắn nhất sử dụng thuật toán tham lam
+vector<int> greedyTSP(int start) {
+- Khởi tạo một vector lưu trữ đường đi ngắn nhất 
+    vector<int> path;
+- Khởi tạo một cái mảng có n phần tử và các phần tử ban đầu = 0 để chứng tỏ chưa đi qua 
+    vector<bool> visited(n, false);
+
+- Bắt đầu từ vị trí start thì đánh dấu nó đã đi qua  push nó vào 
+    visited[start] = true;
+    path.push_back(start);
+    
+
+- Duyệt qua n- 1 thằng thành phố còn lại -
+    for (int i = 0; i < n - 1; ++i) {
+- Lấy ra cái thành phố gần đây nhất mà chúng ta đi qua , tức là được thêm vào cuối của thành phố  - 
+        int cur = path.back(); 
+
+        int next = -1;
+        int minCost = 1e9; - Thành phố tiếp theo trên hành trình - 
+        for (int j = 0; j < n; j++) {
+            if (!visited[j] && minCost >  cost[cur][j]) {
+                minCost = cost[cur][j];
+                next = j;
+            }
+        }
+
+
+
+        if (next == -1) {
+            cerr << "Không tìm thấy đường đi hợp lệ!\n";
+            return vector<int>();
+        }
+
+        visited[next] = true;
+        path.push_back(next);
+    }
+    path.push_back(start); // Quay lại thành phố xuất phát
+    return path;
+}
+
+int main() {
+- Nhập số lượng thành phố - 
+    cout << "Nhập số lượng thành phố: ";
+    cin >> n;
+  - Khởi tạo ma trận chi phí với kích thước  n * n -
+    cost.resize(n, vector<int>(n));
+    - Nhập ma trận chi phí  -
+    cout << "Nhập ma trận chi phí:\n";
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            cin >> cost[i][j];
+        }
+    }
+
+
+    
+    int startCity;
+    cout << "Nhập thành phố xuất phát (từ 0 đến " << n - 1 << "): ";
+    cin >> startCity;
+    
+    vector<int> path = greedyTSP(startCity);
+    
+
+    cout << "Hành trình ngắn nhất là:\n";
+    for (int city : path) {
+        cout << city << " ";
+    }
+    cout << "\n";
+    
+    return 0;
+}
+rong đoạn mã trên, ta có một vòng lặp chạy qua n - 1 thành phố còn lại (vòng lặp for (int i = 0; i < n - 1; ++i)). Mỗi lần lặp, chúng ta sẽ chọn thành phố kế tiếp trong hành trình.
+•	Biến cur lưu trữ thành phố hiện tại của hành trình, là thành phố mà chúng ta đã đi qua gần đây nhất (hoặc thành phố xuất phát ở lần lặp đầu tiên).
+•	Biến next được sử dụng để lưu trữ thành phố tiếp theo trong hành trình, mà chúng ta sẽ thêm vào sau khi tìm được thành phố có chi phí nhỏ nhất.
+•	Biến minCost là biến để lưu trữ chi phí nhỏ nhất để đi từ thành phố hiện tại đến thành phố tiếp theo.
+•	Trong vòng lặp lồng nhau, ta duyệt qua tất cả các thành phố (for (int j = 0; j < n; ++j)) và kiểm tra xem thành phố đó có được đi qua chưa (!visited[j]) và chi phí từ thành phố hiện tại đến thành phố đó có nhỏ hơn chi phí nhỏ nhất hiện tại không (cost[cur][j] < minCost). Nếu thỏa mãn điều kiện này, ta cập nhật next thành thành phố đó và cập nhật minCost thành chi phí từ thành phố hiện tại đến thành phố đó.
+•	Sau khi kết thúc vòng lặp lồng nhau, biến next sẽ chứa chỉ số của thành phố tiếp theo trong hành trình và biến minCost sẽ chứa chi phí đi đến thành phố đó.
+•	Ta cập nhật visited[next] = true để đánh dấu rằng ta đã đi qua thành phố next.
+•	Cuối cùng, ta thêm next vào hành trình (path.push_back(next)) và lặp lại quá trình cho đến khi có hành trình chứa tất cả các thành phố.
+
+
+
+
+
+
+
+
+
